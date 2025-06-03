@@ -46,7 +46,7 @@ const Home = () => {
                 <div className="h-20">
                   <div className="flex py-2 px-6 w-full h-full items-center gap-4">
                     <img
-                      src="/public/svg/solar_temperature-linear.svg"
+                      src="/svg/solar_temperature-linear.svg"
                       className="w-12"
                       alt=""
                     />
@@ -59,7 +59,7 @@ const Home = () => {
                 <div className="h-20">
                   <div className="flex py-2 px-6 w-full h-full items-center gap-4">
                     <img
-                      src="/public/svg/ion_water-outline.svg"
+                      src="/svg/ion_water-outline.svg"
                       className="w-12"
                       alt=""
                     />
@@ -72,7 +72,7 @@ const Home = () => {
                 <div className="h-20">
                   <div className="flex py-2 px-6 w-full h-full items-center gap-4">
                     <img
-                      src="/public/svg/solar_water-bold.svg"
+                      src="/svg/solar_water-bold.svg"
                       className="w-12"
                       alt=""
                     />
@@ -85,7 +85,7 @@ const Home = () => {
                 <div className="h-20">
                   <div className="flex py-2 px-6 w-full h-full items-center gap-4">
                     <img
-                      src="/public/svg/cil_plant.svg"
+                      src="/svg/cil_plant.svg"
                       className="w-12"
                       alt=""
                     />
@@ -105,7 +105,7 @@ const Home = () => {
 
         <section className="w-full my-20">
           <div className="flex gap-3 hover:cursor-pointer">
-            <div className="px-4 py-2 rounded-2xl g-greenMain text-white">All</div>
+            <div className="px-4 py-2 rounded-2xl bg-greenMain text-white">All</div>
             <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">Garden</div>
             <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">Rooftop</div>
             <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">Backyard</div>

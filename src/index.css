@@ -5,13 +5,12 @@
   html {
     font-family: "Poppins", sans-serif;
   }
-  
 }
 
 @theme {
   --color-greenMain: #485935;
-  --color-green3: #93A267;
-  --color-green4: #CADBB7;
-  --color-green4: #FBFBFB;
+  --color-green3: #93a267;
+  --color-green4: #cadbb7;
+  --color-green4: #fbfbfb;
+  --font-overlock: "Overlock";
 }
-

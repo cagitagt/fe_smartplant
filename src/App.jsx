@@ -4,6 +4,7 @@ import Login from './pages/login.jsx';
 import Regist from './pages/regist.jsx';
 import Home from './pages/home.jsx';
 import News from './pages/news.jsx';
+import Dashboard from './pages/dashboard.jsx';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={<Regist />} />
         <Route path="/home" element={<Home />} />
         <Route path="/News" element={<News />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

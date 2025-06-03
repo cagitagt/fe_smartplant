@@ -2,12 +2,12 @@ import React from "react";
 
 const MonsteraPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-16 p-10">
-      <div className="shadow-2xl w-[900px] h-96 shadow-greenMain rounded-2xl">
+    <div className="flex flex-col items-center justify-center min-h-screen gap-14 p-10 bg-greenMain">
+      <div className="shadow-2xl w-[900px] h-96 shadow-greenMain rounded-2xl bg-white">
         <img src="./img/1741960.jpg" alt="monstera" className="object-cover w-full h-full p-10 rounded-2xl"/>
       </div>
 
-      <div className="shadow-2xl w-[900px] h-auto shadow-greenMain rounded-2xl p-12">
+      <div className="shadow-2xl w-[900px] h-auto shadow-greenMain rounded-2xl p-12 bg-white">
         <h1 className="mb-6 text-5xl font-bold">Monstera</h1>
         <p className="text-justify">
           Monstera adalah salah satu jenis tanaman hias tropis yang sangat
