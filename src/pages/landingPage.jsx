@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -16,18 +16,18 @@ const LandingPage = () => {
               , you can mantain your plants.
             </h1>
             <div className="flex gap-4 cursor-pointer mt-9">
-              <a
-                href="login.html"
+              <Link
+                to="/login"
                 className="px-3 py-2 font-bold transition rounded-2xl bg-slate-50 text-greenMain hover:scale-105"
               >
                 Sign In
-              </a>
-              <a
-                href="regist.html"
+              </Link>
+              <Link
+                to="/register"
                 className="px-3 py-2 font-bold transition rounded-2xl hover:scale-105 bg-slate-50 text-greenMain"
               >
                 Sign Up
-              </a>
+              </Link>
             </div>
           </div>
         </div>

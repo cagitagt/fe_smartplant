@@ -1,6 +1,12 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
+import useSensorDataStore from "../store/sensorDataStore";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const { sensorData, fetchSensorData, isLoading, error } =
+    useSensorDataStore();
+
   const plantsContainerRef = useRef(null);
   const newsContainerRef = useRef(null);
 
@@ -13,6 +19,16 @@ const Home = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchSensorData();
+    }, 60000);
+
+    fetchSensorData();
+
+    return () => clearInterval(interval);
+  }, [fetchSensorData]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-whiteMain font-poppins">
@@ -32,8 +48,11 @@ const Home = () => {
                   Hi, Cagita!
                 </h1>
                 <p className="my-2 text-sm">
-                  Check your garden with smart and make it grow 
-                  <span className="text-lg font-bold font-overlock text-greenMain"> beautiful</span>
+                  Check your garden with smart and make it grow
+                  <span className="text-lg font-bold font-overlock text-greenMain">
+                    {" "}
+                    beautiful
+                  </span>
                 </p>
               </div>
             </div>
@@ -51,7 +70,9 @@ const Home = () => {
                       alt=""
                     />
                     <div>
-                      <h1 className="font-bold text-2xl">25°C</h1>
+                      <h1 className="font-bold text-2xl">
+                        {sensorData.temperature}°C
+                      </h1>
                       <p className="text-sm text-greenMain">Temperature</p>
                     </div>
                   </div>
@@ -64,7 +85,9 @@ const Home = () => {
                       alt=""
                     />
                     <div>
-                      <h1 className="font-bold text-2xl">55 %</h1>
+                      <h1 className="font-bold text-2xl">
+                        {sensorData.water_level} %
+                      </h1>
                       <p className="text-sm text-greenMain">Water Level</p>
                     </div>
                   </div>
@@ -77,20 +100,20 @@ const Home = () => {
                       alt=""
                     />
                     <div>
-                      <h1 className="font-bold text-2xl">70 %</h1>
+                      <h1 className="font-bold text-2xl">
+                        {sensorData.humidity} %
+                      </h1>
                       <p className="text-sm text-greenMain">Humidity</p>
                     </div>
                   </div>
                 </div>
                 <div className="h-20">
                   <div className="flex py-2 px-6 w-full h-full items-center gap-4">
-                    <img
-                      src="/svg/cil_plant.svg"
-                      className="w-12"
-                      alt=""
-                    />
+                    <img src="/svg/cil_plant.svg" className="w-12" alt="" />
                     <div>
-                      <h1 className="font-bold text-2xl">2</h1>
+                      <h1 className="font-bold text-2xl">
+                        {sensorData.plants}
+                      </h1>
                       <p className="text-sm text-greenMain">Plants</p>
                     </div>
                   </div>
@@ -105,11 +128,21 @@ const Home = () => {
 
         <section className="w-full my-20">
           <div className="flex gap-3 hover:cursor-pointer">
-            <div className="px-4 py-2 rounded-2xl bg-greenMain text-white">All</div>
-            <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">Garden</div>
-            <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">Rooftop</div>
-            <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">Backyard</div>
-            <div className="px-4 py-2 rounded-2xl bg-greenMain text-white hover:font-extrabold">+</div>
+            <div className="px-4 py-2 rounded-2xl bg-greenMain text-white">
+              All
+            </div>
+            <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">
+              Garden
+            </div>
+            <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">
+              Rooftop
+            </div>
+            <div className="px-4 py-2 rounded-2xl bg-green3 hover:bg-greenMain">
+              Backyard
+            </div>
+            <div className="px-4 py-2 rounded-2xl bg-greenMain text-white hover:font-extrabold">
+              +
+            </div>
           </div>
           <h1 className="mb-2 text-xl font-semibold mt-9">
             Let's check your garden!
@@ -143,10 +176,11 @@ const Home = () => {
                   status: "Strong 🌱",
                   img: "/imgplant/2.png",
                 },
-                { 
-                    name: "Orchid", 
-                    status: "Lush 🌳", 
-                    img: "/imgplant/3.png" },
+                {
+                  name: "Orchid",
+                  status: "Lush 🌳",
+                  img: "/imgplant/3.png",
+                },
                 {
                   name: "Cactus",
                   status: "Growing 🪴",
@@ -159,19 +193,23 @@ const Home = () => {
                 },
                 { name: "Bamboo", status: "Lush 🌳", img: "/imgplant/6.png" },
               ].map((plant, i) => (
-                <div
+                <Link
+                  // to={`/plant/${plant.name.toLowerCase()}`}
+                  to={"/dashboard"}
+                  className="no-underline"
                   key={i}
-                  className="flex flex-col items-center justify-center flex-none w-48 h-64 transition bg-white rounded-md shadow-md hover:scale-105"
                 >
-                  <div
-                    className="bg-center bg-cover rounded-lg w-36 h-36"
-                    style={{ backgroundImage: `url('${plant.img}')` }}
-                  ></div>
-                  <h1 className="mt-3 text-lg font-semibold font-overlock">
-                    {plant.name}
-                  </h1>
-                  <p className="text-sm text-gray-500">{plant.status}</p>
-                </div>
+                  <div className="flex flex-col items-center justify-center flex-none w-48 h-64 transition bg-white rounded-md shadow-md hover:scale-105">
+                    <div
+                      className="bg-center bg-cover rounded-lg w-36 h-36"
+                      style={{ backgroundImage: `url('${plant.img}')` }}
+                    ></div>
+                    <h1 className="mt-3 text-lg font-semibold font-overlock">
+                      {plant.name}
+                    </h1>
+                    <p className="text-sm text-gray-500">{plant.status}</p>
+                  </div>
+                </Link>
               ))}
             </div>
 

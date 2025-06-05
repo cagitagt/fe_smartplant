@@ -1,32 +1,19 @@
-import React from "react";
+import { useEffect } from "react";
+import useSensorDataStore from "../store/sensorDataStore";
 
 const Dashboard = () => {
-  const sensorData = [
-    {
-      value: "25°C",
-      label: "Temperature",
-    },
-    {
-      value: "10 %",
-      label: "Water level",
-    },
-    {
-      value: "70 %",
-      label: "Humidity",
-    },
-    {
-      value: "65.5%",
-      label: "Soil Moisture",
-    },
-    {
-      value: "850",
-      label: "Light Intensity",
-    },
-    {
-      value: "6.8",
-      label: "Ph Level",
-    },
-  ];
+  const { sensorData, fetchSensorData, isLoading, error } =
+    useSensorDataStore();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchSensorData();
+    }, 60000);
+
+    fetchSensorData();
+
+    return () => clearInterval(interval);
+  }, [fetchSensorData]);
 
   const wateringDates = ["12", "13", "14", "15", "16", "17", "18"];
 
@@ -37,7 +24,8 @@ const Dashboard = () => {
           <div className="mb-4">
             <h1 className="mb-1 text-3xl font-bold">White Orchid</h1>
             <p className="h-16 overflow-hidden text-sm text-justify w-80">
-              This white orchid plant was specially prepared as a birthday gift for my beloved daughter at 1st june
+              This white orchid plant was specially prepared as a birthday gift
+              for my beloved daughter at 1st june
             </p>
           </div>
           <div className="relative w-full h-80">
@@ -60,25 +48,80 @@ const Dashboard = () => {
           <div className="flex items-center justify-between w-full h-20 px-5 bg-white shadow-2xl rounded-2xl">
             <h1 className="text-3xl font-bold">Dashboard</h1>
             <div className="flex gap-2">
-              <p className="px-2 text-white rounded-full bg-greenMain">Garden</p>
-              <p className="px-2 text-white rounded-full bg-greenMain">23 Weeks</p>
+              <p className="px-2 text-white rounded-full bg-greenMain">
+                Garden
+              </p>
+              <p className="px-2 text-white rounded-full bg-greenMain">
+                23 Weeks
+              </p>
             </div>
           </div>
 
           <div className="flex items-center justify-center w-full bg-white shadow-2xl h-60 rounded-2xl">
-            <div className="grid grid-cols-3 gap-2">
-              {sensorData.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center h-20 px-4 py-2 w-44 gap-2"
-                >
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p className="text-red-500">Error: {error}</p>
+            ) : (
+              <div className="grid grid-cols-3 gap-2">
+                <div className="flex items-center h-20 px-4 py-2 w-44 gap-2">
                   <div className="p-6">
-                    <h1 className="text-2xl font-bold">{item.value}</h1>
-                    <p className=" text-greenMain font-overlock ">{item.label}</p>
+                    <h1 className="text-2xl font-bold">
+                      {sensorData?.temperature}°C
+                    </h1>
+                    <p className=" text-greenMain font-overlock ">
+                      Temperature
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
+                <div className="flex items-center h-20 px-4 py-2 w-44 gap-2">
+                  <div className="p-6">
+                    <h1 className="text-2xl font-bold">
+                      {sensorData?.humidity}%
+                    </h1>
+                    <p className=" text-greenMain font-overlock ">Humidity</p>
+                  </div>
+                </div>
+                <div className="flex items-center h-20 px-4 py-2 w-44 gap-2">
+                  <div className="p-6">
+                    <h1 className="text-2xl font-bold">
+                      {sensorData?.water_level}%
+                    </h1>
+                    <p className=" text-greenMain font-overlock ">
+                      Water Level
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center h-20 px-4 py-2 w-44 gap-2">
+                  <div className="p-6">
+                    <h1 className="text-2xl font-bold">
+                      {sensorData?.soil_moisture}%
+                    </h1>
+                    <p className=" text-greenMain font-overlock ">
+                      Soil Moisture
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center h-20 px-4 py-2 w-44 gap-2">
+                  <div className="p-6">
+                    <h1 className="text-2xl font-bold">
+                      {sensorData?.light_intensity}%
+                    </h1>
+                    <p className=" text-greenMain font-overlock ">
+                      Light Intensity
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center h-20 px-4 py-2 w-44 gap-2">
+                  <div className="p-6">
+                    <h1 className="text-2xl font-bold">
+                      {sensorData?.ph_level}
+                    </h1>
+                    <p className=" text-greenMain font-overlock ">pH Level</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="w-full p-4 bg-white shadow-2xl h-36 rounded-2xl">

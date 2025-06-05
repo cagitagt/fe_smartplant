@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -7,15 +7,26 @@ const Register = () => {
 
       <div className="relative z-10 h-[550px] w-80 rounded-xl flex flex-col justify-center items-center">
         <h1 className="text-xl font-bold text-white">Welcome</h1>
-        <p className="mb-3 text-sm text-white">Please fill form below to sign up</p>
+        <p className="mb-3 text-sm text-white">
+          Please fill form below to sign up
+        </p>
 
         <div className="w-full h-[400px] bg-white flex flex-col justify-center items-center rounded-2xl shadow-2xl">
-          <h1 className="text-xl font-bold text-greenMain">Create New Account</h1>
-          <p className="mb-3 text-xs text-slate-400">Let's start your plants journey with us!</p>
+          <h1 className="text-xl font-bold text-greenMain">
+            Create New Account
+          </h1>
+          <p className="mb-3 text-xs text-slate-400">
+            Let's start your plants journey with us!
+          </p>
 
           <form className="my-4 w-60">
             <div className="mb-3">
-              <label htmlFor="email" className="block text-xs text-gray-700 font-xs">Email</label>
+              <label
+                htmlFor="email"
+                className="block text-xs text-gray-700 font-xs"
+              >
+                Email
+              </label>
               <input
                 type="email"
                 id="email"
@@ -26,7 +37,12 @@ const Register = () => {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="password" className="block text-xs text-gray-700 font-xs">Password</label>
+              <label
+                htmlFor="password"
+                className="block text-xs text-gray-700 font-xs"
+              >
+                Password
+              </label>
               <input
                 type="password"
                 id="password"
@@ -56,10 +72,13 @@ const Register = () => {
           </form>
 
           <p className="mt-4 text-xs text-center text-gray-500">
-            Have an account?{' '}
-            <a href="/login.html" className="text-xs cursor-pointer text-greenMain hover:underline">
+            Have an account?{" "}
+            <Link
+              to="/login"
+              className="text-xs cursor-pointer text-greenMain hover:underline"
+            >
               Sign In
-            </a>
+            </Link>
           </p>
         </div>
 
